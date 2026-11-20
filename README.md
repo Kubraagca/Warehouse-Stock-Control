@@ -7,9 +7,8 @@ Eski SQL Server yedeği kaynak veri olarak korunur. Yedek dosyalarını bu proje
 ## Başlatma
 
 1. `docker compose up -d` ile MySQL'i başlatın. Bu komut temel, geçmiş-veri ve yönetim tablolarını ilk açılışta oluşturur.
-2. Eski SQL Server dışa aktarımını dönüştürün: `node scripts/convert-sqlserver-export.mjs "C:\\...\\2108StokDb.sql" "database/imports/legacy-import.sql"`.
-3. Oluşan `database/imports/legacy-import.sql` dosyasını MySQL'de çalıştırın; sonra `database/mysql/003_promote_legacy_inventory.sql` ve `database/mysql/007_promote_legacy_orders.sql` dosyalarını çalıştırın.
-4. `npm run dev` komutunu kullanın.
+2. Oluşan `database/imports/legacy-import.sql` dosyasını MySQL'de çalıştırın; sonra `database/mysql/003_promote_legacy_inventory.sql` ve `database/mysql/007_promote_legacy_orders.sql` dosyalarını çalıştırın.
+3. `npm run dev` komutunu kullanın.
 
 Yerel Docker MySQL bağlantısı `127.0.0.1:3307` üzerinden çalışır. API için gerekli ayarlar `backend/.env` dosyasında hazırdır. Bu parolalar yalnızca yerel geliştirme içindir; canlı ortama taşınmaz.
 
