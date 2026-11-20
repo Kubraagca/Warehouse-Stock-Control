@@ -1,0 +1,18 @@
+{
+  "name": "barfas-depo-yonetimi",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c red,blue \"npm run dev --workspace @barfas/api\" \"npm run dev --workspace @barfas/web\"",
+    "build": "npm run build --workspace @barfas/web",
+    "start": "npm run start --workspace @barfas/api",
+    "db:check": "npm run db:check --workspace @barfas/api"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7"
+  }
+}

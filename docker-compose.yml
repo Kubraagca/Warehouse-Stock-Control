@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: barfas-depo-mysql
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: barfas_depo
+      MYSQL_USER: barfas_app
+      MYSQL_PASSWORD: BarfasLocal2026!
+      MYSQL_ROOT_PASSWORD: BarfasRootLocal2026!
+    volumes:
+      - barfas_mysql_data:/var/lib/mysql
+      - ./database/mysql/001_initial_schema.sql:/docker-entrypoint-initdb.d/001_initial_schema.sql:ro
+      - ./database/mysql/002_legacy_staging.sql:/docker-entrypoint-initdb.d/002_legacy_staging.sql:ro
+      - ./database/mysql/004_management_tables.sql:/docker-entrypoint-initdb.d/004_management_tables.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pBarfasRootLocal2026!"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  barfas_mysql_data:
